@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказать водицу</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <header id="pageHeader">
+        <h1 id="headerText">Водичка</h1>
+    </header>
+    <article id="mainArticle">
+        <h1>Заказать водичку</h1>
+        <form method="post" action="/add" id="mainInfo">
+            <fieldset>
+                <legend>
+                    <h2 title="Всё просто, идём по порядку. Это первое">Выберите регион</h2>
+                </legend>
+                <select name="pickedRegion" type="text" placeholder="Подсказка 1" id="regionSelector">
+                    <% for(let i=0; i<dataR.length; i++) {%>
+                        <option>
+                            <%=dataR[i]['name']%>
+                        </option>
+
+                        <% } %>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <h2 title="Молодец! Это второй пункт. Почти половина">Выберите водохранилище</h2>
+                </legend>
+                <select name="pickedWB" type="text" placeholder="Подсказка 2" id="wbSelector"
+                    value="data.WB[i]['name']">
+                    <% for(let i=0; i<dataWB.length; i++) {%>
+                        <option>
+                            <% switch (dataWB[i]['region_uuid']) { case 'b26b0080' : %>
+                                г. Москва || <%=dataWB[i]['name']%>
+                                    <% break; case 'a8bad9e2' : %>
+                                        г. Ярославль || <%=dataWB[i]['name']%>
+                                            <% break; case '9d932f01' : %>
+                                                г. Санкт-Петербург || <%=dataWB[i]['name']%>
+                                                    <% break; default: break; } %>
+                        </option>
+
+                        <% } %>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <h2>Укажите адрес</h2>
+                </legend>
+                <textarea name="adress" placeholder="Населенный пункт, улица, дома, квартира..."
+                    oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea></textarea>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <h2 title="Минимум 1 тонну, извиняй">Укажите количество тон воды</h2>
+                </legend>
+                <input name="tonsofWater" type="number" placeholder="Укажите количество тонн воды" min="1" step="0.5">
+            </fieldset>
+
+        </form>
+        <fieldset id="userDocument"
+            title="Загружать только при необходимости. Прикрепить файл, затем нажать на кнопку 'Прикрепить'">
+            <legend>
+                <h2>Прикрепите доверенность на водителя при необходимости</h2>
+            </legend>
+            <form form action="/upload" method="POST" enctype="multipart/form-data" id="photo">
+                <input type="file" id="uploadFile" name="photo" accept="image/png,application/pdf">
+
+                <button id="button">Прикрепить</button>
+            </form>
+        </fieldset>
+
+        <button id="button" type="submit" form="mainInfo" title="Ура! Нажми и жди вкусную водичку">В путь!</button>
+
+        <%- include ('blocks/menu.ejs') %>
+    </article>
+    <footer id="pageFooter">
+    </footer>
+</body>
+
+</html>

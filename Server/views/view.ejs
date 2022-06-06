@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="pageHeader">
+        <h1>Водичка</h1>
+    </header>
+    <table>
+        <tr>
+            <td>№</td>
+            <td>Регион</td>
+            <td>Водобаза</td>
+            <td>Количество воды</td>
+            <td>Адреса</td>
+            <td>Имя загруженного файла</td>
+        </tr>
+        <% for(let i=0; i<dataP.length; i++) {%>
+            <tr>
+                <td>
+                    <%=(i+1) %>
+                </td>
+                <td>
+                    <%=dataP[i]['pickedRegion'] %>
+                </td>
+                <td>
+                    <%=dataP[i]['pickedWB'] %>
+                </td>
+                <td>
+                    <%=dataP[i]['tonsofWater'] %>
+                </td>
+                <td>
+                    <%=dataP[i]['adress']%>
+                </td>
+                <td>
+                    <%=dataP[i]['photo']%>
+                </td>
+
+            </tr>
+            <% } %>
+    </table>
+
+    <button><a href="/add">Вернуться</button>
+</body>
+
+</html>
